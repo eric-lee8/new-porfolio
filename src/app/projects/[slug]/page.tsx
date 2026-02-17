@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Calendar, Users, Briefcase } from "lucide-react";
 import { projects } from "@/lib/data";
+import { CaseStudyContent } from "@/components/CaseStudyContent";
 
 export function generateStaticParams() {
     return projects.map((project) => ({
@@ -83,24 +84,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </section>
                         )}
 
-                        {/* Case Study Images */}
-                        {project.caseStudyImages && (
-                            <section className="space-y-8">
-                                <h2 className="text-2xl font-bold">Case Study Gallery</h2>
-                                {project.caseStudyImages.map((image, index) => (
-                                    <div key={index} className="space-y-3">
-                                        <div className="rounded-xl overflow-hidden border border-border shadow-sm">
-                                            <img
-                                                src={image.src}
-                                                alt={image.alt}
-                                                className="w-full h-auto"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                        {image.alt && <p className="text-sm text-center text-muted-foreground italic">{image.alt}</p>}
-                                    </div>
-                                ))}
-                            </section>
+                        {/* Structured Case Study Content */}
+                        {project.content && (
+                            <div className="mt-16">
+                                <CaseStudyContent blocks={project.content} />
+                            </div>
                         )}
                     </div>
 
